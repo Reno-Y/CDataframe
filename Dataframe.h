@@ -1,11 +1,7 @@
+#include "column.h"
 #define REALOC_SIZE 256
 
-typedef struct{
-    char* title;
-    int tphys;
-    int tlog;
-    int* values;
-}COLUMN;
+
 
 COLUMN *create_column(char* title);
 
