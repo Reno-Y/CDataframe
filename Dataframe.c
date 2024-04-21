@@ -59,3 +59,67 @@ void print_column(COLUMN *column)
     }
     printf("\n");
 }
+
+int value_occurence(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            occurence++;
+        }
+    }
+    return occurence;
+}
+
+int value_position(COLUMN *column, int value)
+{
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int value_up_to(COLUMN *column, int value)
+{
+    int up_to = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] < value)
+        {
+            up_to++;
+        }
+    }
+    return up_to;
+}
+
+int value_down_to(COLUMN *column, int value)
+{
+    int down_to = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] > value)
+        {
+            down_to++;
+        }
+    }
+    return down_to;
+}
+
+int value_equal_to(COLUMN *column, int value)
+{
+    int equal_to = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            equal_to++;
+        }
+    }
+    return equal_to;
+}
