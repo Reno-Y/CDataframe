@@ -58,7 +58,6 @@ int main() {
     printf("Le nombre de colonnes est : %d\n", number_of_columns(mycolumn));
 
 
-
     return 0;
 
 
