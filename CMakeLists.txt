@@ -4,6 +4,6 @@ project(projetC C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(projetC main.c
-        function.h
-        function.c
+        Dataframe.h
+        Dataframe.c
 )
