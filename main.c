@@ -57,6 +57,8 @@ int main() {
 
     printf("Le nombre de colonnes est : %d\n", number_of_columns(mycolumn));
 
+    COLUMN** mydataframe = CDdataframe(4);
+
 
     return 0;
 

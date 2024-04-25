@@ -123,3 +123,22 @@ int value_equal_to(COLUMN *column, int value)
     }
     return equal_to;
 }
+
+
+COLUMN ** CDdataframe(int nb_col)
+{
+    COLUMN ** tabcddataframe = malloc(nb_col * sizeof (COLUMN*));
+
+    if(tabcddataframe == NULL)
+    {
+        return NULL;
+    }
+    for (int i = 0; i < nb_col; i++)
+    {
+        tabcddataframe[i] = create_column("column");
+
+    }
+    return tabcddataframe;
+
+}
+

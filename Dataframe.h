@@ -20,3 +20,4 @@ int number_of_lines(COLUMN *column);
 
 int number_of_columns(COLUMN *column);
 
+COLUMN** CDdataframe(int nb_col);
