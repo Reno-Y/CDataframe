@@ -14,7 +14,7 @@ int main() {
     insert_value(mycolumn, 30);
     print_column(mycolumn);
 
-    printf("Supprimons la la colone mycolumn\n");
+    printf("Supprimons la la colonne mycolumn\n");
     delete_column(mycolumn);
 
     printf("Combiens de fois se trouve la valeur 10 dans la colonne mycolumn ?\n");
