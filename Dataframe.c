@@ -127,7 +127,7 @@ int value_equal_to(COLUMN *column, int value)
 
 COLUMN ** CDdataframe(int nb_col)
 {
-    COLUMN ** tabcddataframe = malloc(nb_col * sizeof (COLUMN*));
+    COLUMN ** tabcddataframe = (COLUMN**) malloc(nb_col * sizeof (COLUMN*));
 
     if(tabcddataframe == NULL)
     {
