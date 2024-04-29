@@ -127,18 +127,52 @@ int value_equal_to(COLUMN *column, int value)
 
 COLUMN ** CDdataframe(int nb_col)
 {
-    COLUMN ** tabcddataframe = (COLUMN**) malloc(nb_col * sizeof (COLUMN*));
+    COLUMN ** tab_cd_dataframe = (COLUMN**) malloc(nb_col * sizeof (COLUMN*));
 
-    if(tabcddataframe == NULL)
+    if(tab_cd_dataframe == NULL)
     {
         return NULL;
     }
     for (int i = 0; i < nb_col; i++)
     {
-        tabcddataframe[i] = create_column("column");
+        tab_cd_dataframe[i] = create_column("column");
 
     }
-    return tabcddataframe;
+    return tab_cd_dataframe;
 
 }
 
+void rempli_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
+{
+    if (CD_dataframe == NULL)
+    {
+        printf("Liste vide");
+        return;
+    }
+
+    else
+    {
+        for (int i = 0; i < nb_col  ;i++)
+        {
+            int value = 0;
+            printf("entrez les valeurs de la colonne %d : \n", i+1);
+
+            do
+            {
+                printf("Valeur : (veuillez entrer 0 si vous souhaitez aereter la saisie.)");
+                scanf(" %d", &value);
+                if (value != 0)
+                {
+                    insert_value(CD_dataframe[i], value);
+
+                }
+
+            }while (value != 0);
+
+
+
+        }
+    }
+
+    return;
+}

@@ -2,6 +2,7 @@
 #define REALOC_SIZE 256
 
 
+
 void add_line(COLUMN *column, int line, int value);
 
 void delete_line(COLUMN *column, int line , int value);
@@ -21,4 +22,6 @@ int number_of_lines(COLUMN *column);
 int number_of_columns(COLUMN *column);
 
 COLUMN** CDdataframe(int nb_col);
+
+void rempli_cd_dataframe(int nb_col);
 
