@@ -176,3 +176,106 @@ void rempli_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
 
     return;
 }
+
+// fonction qui permet de remplir en dure a faire
+// à completer
+
+
+
+
+ void aff_CD_dataframe(COLUMN ** CD_dataframe, int nb_col)
+{
+    printf("Voici le CD dataframe : ");
+    for (int i = 0; i < nb_col ; i++)
+    {
+        print_column( CD_dataframe[i]);
+        printf("\n");
+        //à revoir car on utliser print colonne mais il faut tout print
+
+    }
+}
+
+
+// une fct Afficher une partie des lignes du CDataframe selon une limite fournie par l’utilisateur A FAIRE.
+
+
+void aff_col_CD_dataframe(COLUMN ** CD_dataframe, int nb_col)
+{
+    int deb, fin;
+
+    do
+    {
+        printf("Saisir la fin de la colonne du CD dataframe à afficher.");
+        scanf("%d", &fin);
+    } while (fin > nb_col || fin < 0);
+
+    do
+    {
+        printf("Saisir le debut de la colonne du CD dataframe à afficher.");
+        scanf("%d", &deb);
+    } while (deb > fin || deb < 0);
+
+
+    printf("Voici le CD dataframe allant de la colonne %d à la colonne %d", deb, fin);
+    for (int i = deb - 1 ; i < fin; i++)
+    {
+        print_column( CD_dataframe[i]);
+        printf("\n");
+
+    }
+}
+
+
+void ajt_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int * valeurs )
+{
+    if (CD_dataframe == NULL || nb_col <= 0 || valeurs == NULL )
+    {
+        printf("Il y a une erreur dans vos saisies, veuillez recommencez avec des valeurs valides !");
+        return ;
+    }
+
+    for (int i = 0; i < nb_col; i++)
+    {
+
+        if (insert_value(CD_dataframe[i], valeurs[i]) != 0)
+        {
+            printf("La case n'est pas libre, impossible d'entrer une valeur !");
+        }
+
+    }
+    printf("Les valeurs ont été ajoutées avec succès");
+}
+
+void supp_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int pos_ligne)
+{
+    if (CD_dataframe == NULL || nb_col <= 0 || pos_ligne <= 0 )
+    {
+        printf("Vos données saisies ne sont pas valide !");
+        return;
+    }
+
+    for (int i = 0; i < nb_col; i++)
+    {
+        delete_line(CD_dataframe[i],  pos_ligne);
+
+    }
+
+}
+
+void ajt_une_col_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, char * titre)
+{
+    if (CD_dataframe == NULL || nb_col <= 0 )
+    {
+        printf("Vos données saisies ne sont pas valide !");
+        return;
+    }
+
+    for (int i = 0; i < nb_col; i++)
+    {
+        if (i == nb_col - 1)
+        {
+             add_column(CD_dataframe[i], titre);
+
+        }
+    }
+}
