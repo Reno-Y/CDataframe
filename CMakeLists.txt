@@ -7,4 +7,5 @@ add_executable(projetC main.c
         Dataframe.h
         Dataframe.c
         column.h
+        column.c
 )

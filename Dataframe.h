@@ -1,6 +1,4 @@
 #include "column.h"
-#define REALOC_SIZE 256
-
 
 
 void add_line(COLUMN *column, int line, int value);
@@ -27,10 +25,10 @@ void rempli_cd_dataframe(COLUMN ** CD_dataframe, int nb_col);
 
 void aff_CD_dataframe(COLUMN ** CD_dataframe, int nb_col);
 
-void aff_col_CD_dataframe(COLUMN ** CD_dataframe, int deb, int fin);
+void aff_col_CD_dataframe(COLUMN ** CD_dataframe, int nb_col);
 
-void ajt_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int valeurs );
+void ajt_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int * valeurs );
 
 void supp_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int pos_ligne);
 
-void ajt_une_col_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, char titre);
+void ajt_une_col_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, char * titre);

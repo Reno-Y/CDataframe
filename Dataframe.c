@@ -1,64 +1,9 @@
 #include "Dataframe.h"
 #include <stdlib.h>
 #include <stdio.h>
+#define REALOC_SIZE 256
 
-COLUMN *create_column(char* title)
-{
-   COLUMN *column = malloc(sizeof(COLUMN));
-        if(column == NULL)
-        {
-            return NULL;
-        }
-        column->title = title;
-        column->tphys = 0;
-        column->tlog = 0;
-        column->values = NULL;
-        return column;
-
-}
-
-
-int insert_value(COLUMN *column, int value)
-{
-    if(column->tlog + 1 > column->tphys)
-    {
-        if(column -> tphys == 0)
-        {
-            column->values = malloc(REALOC_SIZE * sizeof(int));
-            if(column->values == NULL)
-            {
-                return 1;
-            }
-            column->tphys = REALOC_SIZE;
-        }
-        else if(column->tphys >= REALOC_SIZE)
-        {
-            column-> values = realloc(column -> values, (column -> tphys + REALOC_SIZE) * sizeof(int));
-            column->tphys += REALOC_SIZE;
-        }
-    }
-
-    column->values[column->tlog] = value;
-    column->tlog++;
-    return 0;
-}
-
-void delete_column(COLUMN *column)
-{
-    free(column->values);
-    free(column->title);
-    free(column);
-}
-
-void print_column(COLUMN *column)
-{
-    printf("Column %s: \n", column->title);
-    for(int i = 0; i < column->tlog; i++)
-    {
-        printf( "[%d] %d \n", i, column->values[i]);
-    }
-    printf("\n");
-}
+// la fonction permet d'afficher la colonne,
 
 int value_occurence(COLUMN *column, int value)
 {
@@ -73,6 +18,8 @@ int value_occurence(COLUMN *column, int value)
     return occurence;
 }
 
+// la fonction permet de compter le nombre de fois qu'une valeur est présente dans la colonne.
+
 int value_position(COLUMN *column, int value)
 {
     for(int i = 0; i < column->tlog; i++)
@@ -84,6 +31,8 @@ int value_position(COLUMN *column, int value)
     }
     return -1;
 }
+
+// la fonction permet de retourner la position d'une valeur dans la colonne.
 
 int value_up_to(COLUMN *column, int value)
 {
@@ -98,6 +47,8 @@ int value_up_to(COLUMN *column, int value)
     return up_to;
 }
 
+// la fonction permet de retourner le nombre de valeurs inférieures à une valeur donnée.
+
 int value_down_to(COLUMN *column, int value)
 {
     int down_to = 0;
@@ -110,6 +61,8 @@ int value_down_to(COLUMN *column, int value)
     }
     return down_to;
 }
+
+// la fonction permet de retourner le nombre de valeurs supérieures à une valeur donnée.
 
 int value_equal_to(COLUMN *column, int value)
 {
@@ -124,6 +77,7 @@ int value_equal_to(COLUMN *column, int value)
     return equal_to;
 }
 
+//la fonction permet de retourner le nombre de valeurs égales à une valeur donnée.
 
 COLUMN ** CDdataframe(int nb_col)
 {
@@ -142,7 +96,9 @@ COLUMN ** CDdataframe(int nb_col)
 
 }
 
-void rempli_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
+// la fonction permet de créer un tableau de colonnes, on crée un tableau de colonnes avec un titre "column".
+
+void remplir_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
 {
     if (CD_dataframe == NULL)
     {
@@ -159,7 +115,7 @@ void rempli_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
 
             do
             {
-                printf("Valeur : (veuillez entrer 0 si vous souhaitez aereter la saisie.)");
+                printf("Valeur : (veuillez entrer 0 si vous souhaitez areter la saisie.)");
                 scanf(" %d", &value);
                 if (value != 0)
                 {
@@ -173,8 +129,6 @@ void rempli_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
 
         }
     }
-
-    return;
 }
 
 // fonction qui permet de remplir en dure a faire
@@ -246,6 +200,7 @@ void ajt_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int * va
     printf("Les valeurs ont été ajoutées avec succès");
 }
 
+/**
 void supp_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int pos_ligne)
 {
     if (CD_dataframe == NULL || nb_col <= 0 || pos_ligne <= 0 )
@@ -279,3 +234,4 @@ void ajt_une_col_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, char * titre)
         }
     }
 }
+*/

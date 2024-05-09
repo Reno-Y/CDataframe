@@ -17,6 +17,7 @@ int main() {
     printf("Supprimons la la colonne mycolumn\n");
     delete_column(mycolumn);
 
+/*
     printf("Combiens de fois se trouve la valeur 10 dans la colonne mycolumn ?\n");
     printf("La valeur 10 se trouve %d fois dans la colonne mycolumn\n", value_occurence(mycolumn, 10));
 
@@ -35,8 +36,6 @@ int main() {
     printf("Ajoutons la valeur 35 à la ligne 2\n");
     add_line(mycolumn, 2, 35);
 
-    printf("Supprimons la valeur 35 à la ligne 2\n");
-    delete_line(mycolumn, 2, 35);
 
     printf("Ajoutons une colonne à la colonne mycolumn\n");
     add_column(mycolumn, "mycolumn2");
@@ -59,8 +58,7 @@ int main() {
 
     COLUMN** mydataframe = CDdataframe(4);
 
-
     return 0;
-
+*/
 
 }
