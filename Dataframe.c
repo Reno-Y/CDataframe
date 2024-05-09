@@ -6,7 +6,6 @@
 COLUMN** create_empty_cd_dataframe(int nb_col)
 {
     COLUMN **CD_dataframe = malloc(nb_col * sizeof(COLUMN*));
-
     if (CD_dataframe == NULL || nb_col <= 0)
     {
         printf("Erreur dans votre saisies, le nombre de colonnes est invalide !\n");
@@ -17,8 +16,9 @@ COLUMN** create_empty_cd_dataframe(int nb_col)
     {
         char titre[25];
         printf("Veuillez entrez le nom de la colonne %d : \n", i+1);
-
-        CD_dataframe[i] = create_column("test");
+        gets(titre);
+        CD_dataframe[i] = create_column(titre);
+        printf("%s\n", CD_dataframe[i]->title);
     }
     return CD_dataframe;
 }
@@ -90,64 +90,6 @@ void add_line(COLUMN *column, int line, int value)
     column->tlog++;
 
 }
-
-
-
-// la fonction permet de créer un tableau de colonnes, on crée un tableau de colonnes avec un titre "column".
-
-void remplir_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
-{
-    if (CD_dataframe == NULL)
-    {
-        printf("Liste vide");
-        return;
-    }
-
-    else
-    {
-        for (int i = 0; i < nb_col  ;i++)
-        {
-            int value = 0;
-            printf("entrez les valeurs de la colonne %d : \n", i+1);
-
-            do
-            {
-                printf("Valeur : (veuillez entrer 0 si vous souhaitez areter la saisie.)");
-                scanf(" %d", &value);
-                if (value != 0)
-                {
-                    insert_value(CD_dataframe[i], value);
-
-                }
-
-            }while (value != 0);
-
-
-
-        }
-    }
-}
-
-// fonction qui permet de remplir en dure a faire
-// à completer
-
-
-
-
- void aff_CD_dataframe(COLUMN ** CD_dataframe, int nb_col)
-{
-    printf("Voici le CD dataframe : ");
-    for (int i = 0; i < nb_col ; i++)
-    {
-        print_column( CD_dataframe[i]);
-        printf("\n");
-        //à revoir car on utliser print colonne mais il faut tout print
-
-    }
-}
-
-
-// une fct Afficher une partie des lignes du CDataframe selon une limite fournie par l’utilisateur A FAIRE.
 
 
 void aff_col_CD_dataframe(COLUMN ** CD_dataframe, int nb_col)

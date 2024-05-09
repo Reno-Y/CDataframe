@@ -1,23 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "column.h"
+#include <string.h>
 #define REALOC_SIZE 256
 
-COLUMN *create_column(char* title)
-{
+COLUMN *create_column(char* title) {
     COLUMN *column = malloc(sizeof(COLUMN));
-    if(column == NULL)
-    {
+    if (column == NULL) {
         return NULL;
     }
-    column->title = title;
+    column->title = strdup(title); // Copie du titre dans une zone mémoire allouée dynamiquement
+    if (column->title == NULL) {
+        free(column); // Libération de la mémoire allouée pour la colonne si la copie échoue
+        return NULL;
+    }
     column->tphys = 0;
     column->tlog = 0;
     column->values = NULL;
     return column;
 }
-// la fonction permet de créer une collone avec un titre, un nombre de valeurs physique et logique à 0 et un tableau
-// de valeurs vide.
+
 
 int insert_value(COLUMN *column, int value)
 {
@@ -57,7 +59,8 @@ void delete_column(COLUMN *column)
 
 void print_column(COLUMN *column)
 {
-    printf("%s \n", column->title);
+
+    printf("%s\n", column->title);
     for(int i = 0; i < column->tlog; i++)
     {
         printf( "[%d] %d \n", i+1, column->values[i]);
