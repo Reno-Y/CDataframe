@@ -3,98 +3,95 @@
 #include <stdio.h>
 #define REALOC_SIZE 256
 
-// la fonction permet d'afficher la colonne,
-
-int value_occurence(COLUMN *column, int value)
+COLUMN** create_empty_cd_dataframe(int nb_col)
 {
-    int occurence = 0;
-    for(int i = 0; i < column->tlog; i++)
+    COLUMN **CD_dataframe = malloc(nb_col * sizeof(COLUMN*));
+
+    if (CD_dataframe == NULL || nb_col <= 0)
     {
-        if(column->values[i] == value)
-        {
-            occurence++;
-        }
-    }
-    return occurence;
-}
-
-// la fonction permet de compter le nombre de fois qu'une valeur est présente dans la colonne.
-
-int value_position(COLUMN *column, int value)
-{
-    for(int i = 0; i < column->tlog; i++)
-    {
-        if(column->values[i] == value)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
-// la fonction permet de retourner la position d'une valeur dans la colonne.
-
-int value_up_to(COLUMN *column, int value)
-{
-    int up_to = 0;
-    for(int i = 0; i < column->tlog; i++)
-    {
-        if(column->values[i] < value)
-        {
-            up_to++;
-        }
-    }
-    return up_to;
-}
-
-// la fonction permet de retourner le nombre de valeurs inférieures à une valeur donnée.
-
-int value_down_to(COLUMN *column, int value)
-{
-    int down_to = 0;
-    for(int i = 0; i < column->tlog; i++)
-    {
-        if(column->values[i] > value)
-        {
-            down_to++;
-        }
-    }
-    return down_to;
-}
-
-// la fonction permet de retourner le nombre de valeurs supérieures à une valeur donnée.
-
-int value_equal_to(COLUMN *column, int value)
-{
-    int equal_to = 0;
-    for(int i = 0; i < column->tlog; i++)
-    {
-        if(column->values[i] == value)
-        {
-            equal_to++;
-        }
-    }
-    return equal_to;
-}
-
-//la fonction permet de retourner le nombre de valeurs égales à une valeur donnée.
-
-COLUMN ** CDdataframe(int nb_col)
-{
-    COLUMN ** tab_cd_dataframe = (COLUMN**) malloc(nb_col * sizeof (COLUMN*));
-
-    if(tab_cd_dataframe == NULL)
-    {
+        printf("Erreur dans votre saisies, le nombre de colonnes est invalide !\n");
         return NULL;
     }
+
     for (int i = 0; i < nb_col; i++)
     {
-        tab_cd_dataframe[i] = create_column("column");
+        char titre[25];
+        printf("Veuillez entrez le nom de la colonne %d : \n", i+1);
+
+        CD_dataframe[i] = create_column("test");
+    }
+    return CD_dataframe;
+}
+
+
+
+void fill_cd_dataframe(COLUMN ** CD_dataframe, int nb_col) {
+    if (CD_dataframe == NULL || nb_col <= 0) {
+        printf("Le nombre de colonnes est invalide, veuillez recommencer avec un nombre valide !");
+        return;
+    }
+
+    for (int i = 0; i < nb_col; i++) {
+        int value = 0;
+        printf("entrez les valeurs de la colonne %d : \n", i + 1);
+
+        do {
+            printf("Valeur : (veuillez entrer 0 si vous souhaitez areter la saisie.) \n");
+            scanf(" %d", &value);
+            if (value != 0) {
+                insert_value(CD_dataframe[i], value);
+
+            }
+
+        } while (value != 0);
+    }
+}
+
+void print_cd_dataframe(COLUMN ** CD_dataframe, int nb_col)
+{
+    for (int i = 0; i < nb_col; i++) {
+        print_column(CD_dataframe[i]);
 
     }
-    return tab_cd_dataframe;
+}
+
+void add_line(COLUMN *column, int line, int value)
+{
+    if (line < 0 || line > column->tlog)
+    {
+        printf("La ligne n'existe pas");
+        return;
+    }
+
+    if(column->tlog + 1 > column->tphys)
+    {
+        if(column -> tphys == 0)
+        {
+            column->values = malloc(REALOC_SIZE * sizeof(int));
+            if(column->values == NULL)
+            {
+                return;
+            }
+            column->tphys = REALOC_SIZE;
+        }
+        else if(column->tphys >= REALOC_SIZE)
+        {
+            column-> values = realloc(column -> values, (column -> tphys + REALOC_SIZE) * sizeof(int));
+            column->tphys += REALOC_SIZE;
+        }
+    }
+
+    for (int i = column->tlog; i > line; i--)
+    {
+        column->values[i] = column->values[i - 1];
+    }
+
+    column->values[line] = value;
+    column->tlog++;
 
 }
+
+
 
 // la fonction permet de créer un tableau de colonnes, on crée un tableau de colonnes avec un titre "column".
 

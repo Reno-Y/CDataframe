@@ -57,10 +57,10 @@ void delete_column(COLUMN *column)
 
 void print_column(COLUMN *column)
 {
-    printf("Column %s: \n", column->title);
+    printf("%s \n", column->title);
     for(int i = 0; i < column->tlog; i++)
     {
-        printf( "[%d] %d \n", i, column->values[i]);
+        printf( "[%d] %d \n", i+1, column->values[i]);
     }
     printf("\n");
 }

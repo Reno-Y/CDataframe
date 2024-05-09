@@ -4,18 +4,13 @@
 
 int main() {
 
-    COLUMN *mycolumn = create_column("mycolumn");
 
 
-    insert_value(mycolumn, 10);
-    insert_value(mycolumn, 15);
-    insert_value(mycolumn, 20);
-    insert_value(mycolumn, 25);
-    insert_value(mycolumn, 30);
-    print_column(mycolumn);
+    COLUMN **dataframe = create_empty_cd_dataframe(2);
+    fill_cd_dataframe(dataframe, 2);
+    print_cd_dataframe(dataframe, 2);
 
-    printf("Supprimons la la colonne mycolumn\n");
-    delete_column(mycolumn);
+
 
 /*
     printf("Combiens de fois se trouve la valeur 10 dans la colonne mycolumn ?\n");

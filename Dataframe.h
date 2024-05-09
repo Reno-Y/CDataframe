@@ -1,5 +1,10 @@
 #include "column.h"
 
+COLUMN** create_empty_cd_dataframe(int nb_col);
+
+void fill_cd_dataframe(COLUMN ** CD_dataframe, int nb_col);
+
+void print_cd_dataframe(COLUMN ** CD_dataframe, int nb_col);
 
 void add_line(COLUMN *column, int line, int value);
 
