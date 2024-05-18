@@ -35,16 +35,16 @@ int choice;
 
     COLUMN *mycol = create_column("test");
     insert_value(mycol, 1);
-    insert_value(mycol, 2);
-    insert_value(mycol, 6);
+    insert_value(mycol, 3);
+    insert_value(mycol, 3);
     insert_value(mycol, 3);
     insert_value(mycol, 5);
     print_column(mycol);
     printf(" L'occuruence de la valeur 3 est %d\n", value_occurence(mycol, 3));
     printf(" La position de la valeur 3 est %d\n", value_position(mycol, 3));
-    printf("--------------------------------\n");
-    printf(" Le nombre de valeurs superieures a 3 est %d\n", value_up_to(mycol, 10));
-    printf(" Le nombre de valeurs inferieures a 3 est %d\n", value_down_to(mycol, 3));
+    printf("--------------------------------------------\n");
+    printf(" Le nombre de valeurs superieures a 3 est %d\n", value_up_to(mycol, 3));
+    printf(" Le nombre de valeurs inferieures a 3 est %d\n", value_down_to(mycol, 1));
     printf(" Le nombre de valeurs egale a 3 est %d\n", value_equal_to(mycol, 3));
 
 
