@@ -14,8 +14,8 @@ COLUMN *create_column(char* title) {
         free(column); // Libération de la mémoire allouée pour la colonne si la copie échoue
         return NULL;
     }
-    column->tphys = 0;
     column->tlog = 0;
+    column->tphys = 0;
     column->values = NULL;
     return column;
 }

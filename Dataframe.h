@@ -1,10 +1,19 @@
 #include "column.h"
 
-COLUMN** create_empty_cd_dataframe(int nb_col);
+typedef struct
+{
+    COLUMN *maillon;
+    struct DATAFRAME *succ;
 
-void fill_cd_dataframe(COLUMN ** CD_dataframe, int nb_col);
+}DATAFRAME;
+
+DATAFRAME create_a_dataframe();
+
+void fill_cd_dataframe( int nb_col);
 
 void print_cd_dataframe(COLUMN ** CD_dataframe, int nb_col);
+
+COLUMN** create_dataframe(int nb_columns);
 
 void add_line(COLUMN *column, int line, int value);
 
