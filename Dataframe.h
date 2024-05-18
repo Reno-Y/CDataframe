@@ -1,5 +1,13 @@
 #include "column.h"
 
+/*"""typedef struct{
+    COLUMN p;
+
+    int succ;
+    int* values;
+}CDATAFRAME;*/
+
+
 COLUMN** create_empty_cd_dataframe(int nb_col);
 
 void fill_cd_dataframe(COLUMN ** CD_dataframe, int nb_col);
@@ -25,6 +33,7 @@ int number_of_lines(COLUMN *column);
 int number_of_columns(COLUMN *column);
 
 COLUMN** CDdataframe(int nb_col);
+
 
 void rempli_cd_dataframe(COLUMN ** CD_dataframe, int nb_col);
 

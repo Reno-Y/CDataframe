@@ -43,7 +43,7 @@ void fill_cd_dataframe(COLUMN ** CD_dataframe, int nb_col) {
 
             }
 
-        } while (value != 0);
+        } while (value != 0); /////pas bon
     }
 }
 
@@ -139,7 +139,7 @@ void ajt_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int * va
     printf("Les valeurs ont été ajoutées avec succès");
 }
 
-/**
+/*
 void supp_ligne_valeurs_CD_dataframe(COLUMN ** CD_dataframe, int nb_col, int pos_ligne)
 {
     if (CD_dataframe == NULL || nb_col <= 0 || pos_ligne <= 0 )

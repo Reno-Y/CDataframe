@@ -9,7 +9,11 @@ COLUMN *create_column(char* title) {
     if (column == NULL) {
         return NULL;
     }
-    column->title = strdup(title); // Copie du titre dans une zone mémoire allouée dynamiquement
+    //column->title = strdup(title); // Copie du titre dans une zone mémoire allouée dynamiquement
+    //column->title = title; //pas possible parce title est un tableau statique
+    column->title = (char*)malloc((strlen(title)+1)*sizeof(char));
+    strcpy(column->title,title);
+
     if (column->title == NULL) {
         free(column); // Libération de la mémoire allouée pour la colonne si la copie échoue
         return NULL;
@@ -69,3 +73,15 @@ void print_column(COLUMN *column)
 }
 
 // la fonction permet d'afficher la colonne, on affiche le titre de la colonne et les valeurs de la colonne.
+
+int value_equal_to(COLUMN *CD_dataframme, int value, int nb_col)
+{
+    int tmp;
+    for (int i = 0; i < nb_col; i++)
+    {
+        if CD_dataframe->va
+
+
+    }
+
+}
