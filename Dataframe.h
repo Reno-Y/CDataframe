@@ -1,13 +1,6 @@
 #include "column.h"
 
-typedef struct
-{
-    COLUMN *maillon;
-    struct DATAFRAME *succ;
 
-}DATAFRAME;
-
-DATAFRAME create_a_dataframe();
 
 void fill_cd_dataframe( int nb_col);
 

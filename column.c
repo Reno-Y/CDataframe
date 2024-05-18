@@ -39,6 +39,7 @@ int insert_value(COLUMN *column, int value)
             column-> values = realloc(column -> values, (column -> tphys + REALOC_SIZE) * sizeof(int));
             column->tphys += REALOC_SIZE;
         }
+
     }
 
     column->values[column->tlog] = value;
@@ -59,13 +60,88 @@ void delete_column(COLUMN *column)
 
 void print_column(COLUMN *column)
 {
-
-    printf("%s\n", column->title);
-    for(int i = 0; i < column->tlog; i++)
+    if (column -> tlog == 0)
     {
-        printf( "[%d] %d \n", i+1, column->values[i]);
+        printf("La colonne n'existe pas\n");
+        return;
     }
-    printf("\n");
+    else
+    {
+        printf("%s\n", column->title);
+        for(int i = 0; i < column->tlog; i++)
+        {
+            printf( "[%d] %d \n", i+1, column->values[i]);
+        }
+        printf("\n");
+
+    }
+
 }
 
 // la fonction permet d'afficher la colonne, on affiche le titre de la colonne et les valeurs de la colonne.
+
+int value_occurence(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            occurence++;
+        }
+    }
+    return occurence;
+}
+
+int value_position(COLUMN *column, int value)
+{
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            return i+1;
+        }
+    }
+    printf("La valeur n'existe pas dans la colonne\n");
+}
+
+int value_up_to(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] < value)
+        {
+            occurence++;
+        }
+    }
+    return occurence;
+
+}
+
+int value_down_to(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] > value)
+        {
+            occurence++;
+        }
+    }
+
+    return occurence;
+}
+
+int value_equal_to(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            occurence++;
+        }
+    }
+    return occurence;
+}
