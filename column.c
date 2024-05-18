@@ -10,8 +10,6 @@ COLUMN *create_column(char* title) {
     if (column == NULL) {
         return NULL;
     }
-    //column->title = strdup(title); // Copie du titre dans une zone mémoire allouée dynamiquement
-    //column->title = title; //pas possible parce title est un tableau statique
 
     column->title = (char*)malloc((strlen(title)+1)*sizeof(char)); // Allocation de la mémoire pour le titre
     strcpy(column->title,title);
@@ -69,27 +67,55 @@ void delete_column(COLUMN *column)
 
 
 
-void print_column(COLUMN *column)
+void print_column(COLUMN *columns, int nb_col)
 {
-    if (column -> tlog == 0)
-    {
-        // Affiche un message si la colonne est vide
-        printf("La colonne n'existe pas\n");
+    // Vérifier si toutes les colonnes sont vides
+
+    int all_empty = 1;
+    for (int i = 0; i < nb_col; i++) {
+        if (columns[i].tlog != 0) {
+            all_empty = 0;
+            break;
+        }
+    }
+
+    if (all_empty) {
+        // Affiche un message si toutes les colonnes sont vides
+
+        printf("Toutes les colonnes sont vides\n");
         return;
     }
-    else
+
+    // Afficher les titres des colonnes
+    for (int i = 0; i < nb_col; i++)
     {
-        // Affiche le titre de la colonne et les valeurs de la colonne
-
-        printf("%s\n", column->title);
-        for(int i = 0; i < column->tlog; i++)
+        if (columns[i].tlog != 0)
         {
-            printf( "[%d] %d \n", i+1, column->values[i]);
+            printf("%-15s", columns[i].title);
         }
-        printf("\n");
+    }
+    printf("\n");
 
+    // Déterminer la longueur maximale de toutes les colonnes
+    int max_tlog = 0;
+    for (int i = 0; i < nb_col; i++) {
+        if (columns[i].tlog > max_tlog) {
+            max_tlog = columns[i].tlog;
+        }
     }
 
+    // Afficher les valeurs des colonnes
+    for (int i = 0; i < max_tlog; i++) {
+        for (int j = 0; j < nb_col; j++) {
+            if (i < columns[j].tlog) {
+                printf("[%d] %-11d", i + 1, columns[j].values[i]);
+            } else {
+                printf("               ");
+                // Espace pour les colonnes avec moins de lignes
+            }
+        }
+        printf("\n");
+    }
 }
 
 

@@ -33,19 +33,24 @@ int choice;
     }
 */
 
-    COLUMN *mycol = create_column("test");
+    COLUMN *mycol = create_column("Column 1");
+    COLUMN *mycol2 = create_column("test2");
+
     insert_value(mycol, 1);
     insert_value(mycol, 3);
     insert_value(mycol, 3);
-    insert_value(mycol, 3);
-    insert_value(mycol, 5);
-    print_column(mycol);
-    printf(" L'occuruence de la valeur 3 est %d\n", value_occurence(mycol, 3));
-    printf(" La position de la valeur 3 est %d\n", value_position(mycol, 3));
-    printf("--------------------------------------------\n");
-    printf(" Le nombre de valeurs superieures a 3 est %d\n", value_up_to(mycol, 3));
-    printf(" Le nombre de valeurs inferieures a 3 est %d\n", value_down_to(mycol, 1));
-    printf(" Le nombre de valeurs egale a 3 est %d\n", value_equal_to(mycol, 3));
+
+
+
+    insert_value(mycol2, 5);
+    insert_value(mycol2, 4);
+    insert_value(mycol2, 3);
+    insert_value(mycol2, 2);
+    insert_value(mycol2, 1);
+
+    COLUMN columns[] = {*mycol, *mycol2};
+    print_column(columns,2);
+
 
 
 
