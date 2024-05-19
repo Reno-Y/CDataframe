@@ -1,20 +1,30 @@
 #include <stdio.h>
 #include "Dataframe.h"
+void welcome_message()
+{
+    printf("**********************************************************************\n");
+    printf("Bienvenu dans le programme de test de la structure de donnee Dataframe\n");
+    printf("**********************************************************************\n");
+    printf("\n");
+    printf("Pour afficher le menu\n");
+    printf("Appuyez sur une entrer pour continuer\n");
+    printf("\n");
+    getchar();
+}
+
+void wait_for_user() {
+    printf("Appuyez sur une touche pour continuer...\n");
+    getchar(); // Consomme le '\n' laissé par scanf
+    getchar(); // Attend une nouvelle entrée de l'utilisateur
+}
 
 int main()
 {
     CDATAFRAME *dataframe = create_empty_dataframe();
+    welcome_message();
 
     int choice = 0;
     do {
-        printf("**********************************************************************\n");
-        printf("Bienvenu dans le programme de test de la structure de donnee Dataframe\n");
-        printf("**********************************************************************\n");
-        printf("\n");
-        printf("Pour afficher le menu\n");
-        printf("Appuyez sur une entrer pour continuer\n");
-
-        getchar();
 
         printf("\n");
         printf("------------------------------------\n");
@@ -80,6 +90,7 @@ int main()
 
                         break;
                 }
+                wait_for_user();
                 break;
 
             case 2:
@@ -134,6 +145,7 @@ int main()
                         choix_affichage = 0;
                         break;
                 }
+                wait_for_user();
                 break;
 
             case 3:
@@ -226,6 +238,7 @@ int main()
 
 
                 }
+                wait_for_user();
                 break;
             case 4:
                 printf("----------------\n");
@@ -294,6 +307,7 @@ int main()
                         choix_statistiques = 0;
                         break;
                 }
+                wait_for_user();
                 break;
         }
 
