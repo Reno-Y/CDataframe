@@ -36,8 +36,7 @@ int choice;
     CDATAFRAME *dataframe = create_empty_dataframe();
     fill_dataframe_hardcode(dataframe);
 
-    print_column_dataframe(dataframe, 1);
-
+    print_all_dataframe(dataframe);
 
     return 0;
 

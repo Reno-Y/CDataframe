@@ -18,4 +18,26 @@ void print_line_dataframe(CDATAFRAME *dataframe, int line);
 
 void print_column_dataframe(CDATAFRAME *dataframe, int column);
 
+void add_column_to_dataframe(CDATAFRAME *dataframe);
+
 void add_line_to_dataframe(CDATAFRAME *dataframe);
+
+void remove_column_from_dataframe(CDATAFRAME *dataframe);
+
+void rename_column(CDATAFRAME *dataframe);
+
+void does_value_exist(CDATAFRAME *dataframe);
+
+void replace_value(CDATAFRAME *dataframe, int line, int column);
+
+void print_columns_name(CDATAFRAME *dataframe);
+
+void print_nb_lines(CDATAFRAME *dataframe);
+
+void print_nb_columns(CDATAFRAME *dataframe);
+
+void nb_of_cells_equal_to(CDATAFRAME *dataframe, int value);
+
+void nb_of_cells_greater_than(CDATAFRAME *dataframe, int value);
+
+void nb_of_cells_lower_than(CDATAFRAME *dataframe, int value);

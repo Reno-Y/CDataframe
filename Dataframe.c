@@ -1,6 +1,7 @@
 #include "Dataframe.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define BUFFER_SIZE 256
 
 CDATAFRAME* create_empty_dataframe()
@@ -42,7 +43,7 @@ void fill_dataframe_hardcode(CDATAFRAME *dataframe)
 
 }
 
-int add_column_to_dataframe(CDATAFRAME *dataframe, COLUMN *column) {
+int add_to_dataframe(CDATAFRAME *dataframe, COLUMN *column) {
     COLUMN **new_columns = realloc(dataframe->column, (dataframe->nbcol + 1) * sizeof(COLUMN *));
     if (new_columns == NULL) {
         return 1;
@@ -95,7 +96,7 @@ void fill_dataframe(CDATAFRAME *dataframe) {
             }
         }
 
-        if (add_column_to_dataframe(dataframe, column) != 0)
+        if (add_to_dataframe(dataframe, column) != 0)
         {
             printf("Erreur lors de l'ajout de la colonne au dataframe.\n");
             delete_column(column);
@@ -173,8 +174,253 @@ void print_column_dataframe(CDATAFRAME *cdataframe, int column)
     printf("\n");
 }
 
-void add_line_to_dataframe(CDATAFRAME *cdataframe)
+void add_column_to_dataframe(CDATAFRAME *dataframe)
+{
+    char title[BUFFER_SIZE];
+    printf("Veuillez saisir le titre de la colonne que vous voulez ajouter : \n");
+    scanf("%s", title);
+
+    COLUMN *column = create_column(title);
+    if (column == NULL)
+    {
+        printf("Erreur lors de la création de la colonne.\n");
+        return;
+    }
+    printf("Veuillez saisir le nombre de valeurs que vous voulez ajouter a la colonne : \n");
+    int nbval;
+    if (scanf("%d", &nbval) != 1 || nbval < 0)
+    {
+        printf("Nombre de valeurs invalide.\n");
+        delete_column(column);
+        return;
+    }
+    for(int i = 0; i < nbval; i++)
+    {
+        int value;
+        printf("Veuillez saisir la valeur %d de la colonne : \n", i + 1);
+        if (scanf("%d", &value) != 1)
+        {
+            printf("Valeur invalide.\n");
+            continue;
+        }
+        if (insert_value(column, value) != 0)
+        {
+            printf("Erreur lors de l'insertion de la valeur.\n");
+            continue;
+        }
+    }
+    if (add_to_dataframe(dataframe, column) != 0)
+    {
+        printf("Erreur lors de l'ajout de la colonne au dataframe.\n");
+        delete_column(column);
+    }
+}
+
+// 3.Opérations usuelles
+
+void add_line_to_dataframe(CDATAFRAME *dataframe) {
+    int collumn = 0;
+    for (int i = 0; i < dataframe->nbcol; i++) {
+        collumn++;
+    }
+    for (int i = 0; i < collumn; i++) {
+        int value;
+        printf("Veuillez saisir la valeur de la colonne %d : \n", i + 1);
+        if (scanf("%d", &value) != 1) {
+            printf("Valeur invalide.\n");
+            continue;
+        }
+        if (insert_value(dataframe->column[i], value) != 0) {
+            printf("Erreur lors de l'insertion de la valeur.\n");
+            continue;
+        }
+    }
+}
+
+void remove_column_from_dataframe(CDATAFRAME *dataframe)
+{
+    int column;
+    printf("Veuillez saisir le numero de la colonne que vous voulez supprimer : \n");
+    if (scanf("%d", &column) != 1 || column < 1 || column > dataframe->nbcol)
+    {
+        printf("Numéro de colonne invalide.\n");
+        return;
+    }
+    delete_column(dataframe->column[column - 1]);
+    for (int i = column; i < dataframe->nbcol; i++)
+    {
+        dataframe->column[i - 1] = dataframe->column[i];
+    }
+    dataframe->nbcol--;
+    dataframe->column = realloc(dataframe->column, dataframe->nbcol * sizeof(COLUMN *));
+}
+
+void rename_column(CDATAFRAME *dataframe)
+{
+    int column;
+    printf("Veuillez saisir le numero de la colonne que vous voulez renommer : \n");
+    if (scanf("%d", &column) != 1 || column < 1 || column > dataframe->nbcol)
+    {
+        printf("Numéro de colonne invalide.\n");
+        return;
+    }
+    char title[BUFFER_SIZE];
+    printf("Veuillez saisir le nouveau titre de la colonne : \n");
+    scanf("%s", title);
+    dataframe->column[column-1]->title = (char*)malloc((strlen(title)+1)*sizeof(char)); // Allocation de la mémoire pour le titre
+    strcpy(dataframe->column[column-1]->title,title);
+
+}
+
+void does_value_exist(CDATAFRAME *dataframe)
+{
+    int value;
+    printf("Veuillez saisir la valeur que vous voulez chercher : \n");
+    if (scanf("%d", &value) != 1)
+    {
+        printf("Valeur invalide.\n");
+        return;
+    }
+    int count = 0;
+    for (int i = 0; i < dataframe->nbcol; i++)
+    {
+        for (int j = 0; j < dataframe->column[i]->tlog; j++)
+        {
+            if (dataframe->column[i]->values[j] == value)
+            {
+                count++;
+
+            }
+        }
+    }
+    if (count !=0)
+    {
+        printf("La valeur %d a ete trouvee %d fois dans le dataframe.\n", value, count);
+    }
+    else
+    {
+        printf("La valeur %d n'a pas ete trouvee dans le dataframe.\n", value);
+    }
+
+}
+
+void replace_value(CDATAFRAME *dataframe, int line, int column)
+{
+    if (line < 1 || line > dataframe->column[column - 1]->tlog)
+    {
+        printf("La ligne n'existe pas\n");
+        return;
+    }
+    int value;
+    printf("Veuillez saisir la nouvelle valeur de la cellule : \n");
+    if (scanf("%d", &value) != 1)
+    {
+        printf("Valeur invalide.\n");
+        return;
+    }
+    dataframe->column[column - 1]->values[line - 1] = value;
+}
+
+void print_columns_name(CDATAFRAME *dataframe)
+{
+    printf("Le nom des colonnes sont : \n");
+    for (int i = 0; i < dataframe->nbcol; i++)
+    {
+        printf("%s\n", dataframe->column[i]->title);
+    }
+}
+
+// 4.Analyse et statistiques
+
+void print_nb_lines(CDATAFRAME *dataframe)
+{
+    int max = 0;
+    for (int i = 0; i < dataframe->nbcol; i++)
+    {
+        if (dataframe->column[i]->tlog > max)
+        {
+            max = dataframe->column[i]->tlog;
+        }
+    }
+    printf("Le nombre de lignes du dataframe est : %d\n", max);
+}
+
+void print_nb_columns(CDATAFRAME *dataframe)
+{
+    printf("Le nombre de colonnes du dataframe est : %d\n", dataframe->nbcol);
+}
+
+void nb_of_cells_equal_to(CDATAFRAME *dataframe,int value)
 {
 
+    int count = 0;
+    for (int i = 0; i < dataframe->nbcol; i++)
+    {
+        for (int j = 0; j < dataframe->column[i]->tlog; j++)
+        {
+            if (dataframe->column[i]->values[j] == value)
+            {
+                count++;
+            }
+        }
+    }
+    if (count == 0)
+    {
+        printf("La valeur %d n'a pas ete trouvee dans le dataframe.\n", value);
+        return;
+    }
+    else
+    {
+        printf("Le nombre de cellules contenant la valeur %d est : %d\n", value, count);
+    }
+}
 
+void nb_of_cells_greater_than(CDATAFRAME *dataframe, int value)
+{
+
+    int count = 0;
+    for (int i = 0; i < dataframe->nbcol; i++)
+    {
+        for (int j = 0; j < dataframe->column[i]->tlog; j++)
+        {
+            if (dataframe->column[i]->values[j] > value)
+            {
+                count++;
+            }
+        }
+    }
+    if (count == 0)
+    {
+        printf("Aucune cellule n'est superieure a la valeur %d.\n", value);
+        return;
+    }
+    else
+    {
+        printf("Le nombre de cellules superieures a la valeur %d est : %d\n", value, count);
+    }
+}
+
+void nb_of_cells_lower_than(CDATAFRAME *dataframe, int value)
+{
+
+    int count = 0;
+    for (int i = 0; i < dataframe->nbcol; i++)
+    {
+        for (int j = 0; j < dataframe->column[i]->tlog; j++)
+        {
+            if (dataframe->column[i]->values[j] < value)
+            {
+                count++;
+            }
+        }
+    }
+    if (count == 0)
+    {
+        printf("Aucune cellule n'est inferieure a la valeur %d.\n", value);
+        return;
+    }
+    else
+    {
+        printf("Le nombre de cellules inferieures a la valeur %d est : %d\n", value, count);
+    }
 }
