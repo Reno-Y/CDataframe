@@ -11,3 +11,6 @@ CDataframe *create_empty_dataframe();
 void add_column_to_dataframe(CDataframe *dataframe, COLUMN *column);
 
 void fill_cdataframe(CDataframe *dataframe);
+
+
+void print_cdataframe(CDataframe *dataframe);
