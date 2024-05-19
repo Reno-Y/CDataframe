@@ -4,14 +4,14 @@
 #include <string.h>
 #define REALOC_SIZE 256
 
+
 COLUMN *create_column(char* title) {
     COLUMN *column = malloc(sizeof(COLUMN));
     if (column == NULL) {
         return NULL;
     }
-    //column->title = strdup(title); // Copie du titre dans une zone mémoire allouée dynamiquement
-    //column->title = title; //pas possible parce title est un tableau statique
-    column->title = (char*)malloc((strlen(title)+1)*sizeof(char));
+
+    column->title = (char*)malloc((strlen(title)+1)*sizeof(char)); // Allocation de la mémoire pour le titre
     strcpy(column->title,title);
 
     if (column->title == NULL) {
@@ -31,10 +31,13 @@ int insert_value(COLUMN *column, int value)
     {
         if(column -> tphys == 0)
         {
+
+            // Alocation de la mémoire pour le tableau de valeurs si la taille physique est null
             column->values = malloc(REALOC_SIZE * sizeof(int));
+
             if(column->values == NULL)
             {
-                return 1;
+                return 1; // Retourne 1 si l'allocation échoue
             }
             column->tphys = REALOC_SIZE;
         }
@@ -42,46 +45,161 @@ int insert_value(COLUMN *column, int value)
         {
             column-> values = realloc(column -> values, (column -> tphys + REALOC_SIZE) * sizeof(int));
             column->tphys += REALOC_SIZE;
+
+            // Réallocation de la mémoire pour le tableau de valeurs si la taille physique est supérieure à REALOC_SIZE
         }
+
     }
 
     column->values[column->tlog] = value;
     column->tlog++;
-    return 0;
+    return 0; // Retourne 0 si l'insertion est réussie
 }
-// la fonction permet d'ajouter une valeur à la colonne, si le nombre de valeurs logiques est supérieur au nombre de
-// valeurs alors on réalloue de la mémoire pour le tableau de valeurs.
+
 
 void delete_column(COLUMN *column)
 {
+    // Libération de la mémoire allouée pour le tableau de valeurs et le titre de la colonne
     free(column->values);
     free(column->title);
     free(column);
 }
-// la fonction permet de supprimer une colonne, on libère la mémoire allouée pour le tableau de valeurs, le titre et la
-// colonne.
 
-void print_column(COLUMN *column)
+
+
+void print_column(COLUMN *columns, int nb_col)
 {
 
-    printf("%s\n", column->title);
-    for(int i = 0; i < column->tlog; i++)
-    {
-        printf( "[%d] %d \n", i+1, column->values[i]);
+    /*
+    int nb_real_column = sizeof columns / sizeof columns[0];
+
+    if (nb_col > nb_real_column) {
+        printf("Le nombre de colonnes a afficher est superieur au nombre de colonnes reelles\n");
+        return;
     }
-    printf("\n");
-}
+     //tentative de verification du nombre de colonnes a afficher
+    */
 
-// la fonction permet d'afficher la colonne, on affiche le titre de la colonne et les valeurs de la colonne.
+    int all_empty = 1;
+    for (int i = 0; i < nb_col; i++) {
+        if (columns[i].tlog != 0) {
+            all_empty = 0;
+            break;
+        }
+    }
+    // Vérifier si toutes les colonnes sont vides
 
-int value_equal_to(COLUMN *CD_dataframme, int value, int nb_col)
-{
-    int tmp;
+
+
+
+    if (all_empty) {
+        // Affiche un message si toutes les colonnes sont vides
+
+        printf("Toutes les colonnes sont vides\n");
+        return;
+    }
+
+    // Afficher les titres des colonnes
     for (int i = 0; i < nb_col; i++)
     {
-        if CD_dataframe->va
+        if (columns[i].tlog != 0)
+        {
+            printf("%-15s", columns[i].title);
+        }
+    }
+    printf("\n");
 
-
+    // Déterminer la longueur maximale de toutes les colonnes
+    int max_tlog = 0;
+    for (int i = 0; i < nb_col; i++) {
+        if (columns[i].tlog > max_tlog) {
+            max_tlog = columns[i].tlog;
+        }
     }
 
+    // Afficher les valeurs des colonnes
+    for (int i = 0; i < max_tlog; i++) {
+        for (int j = 0; j < nb_col; j++) {
+            if (i < columns[j].tlog) {
+                printf("[%d] %-11d", i + 1, columns[j].values[i]);
+            } else {
+                printf("               ");
+                // Espace pour les colonnes avec moins de lignes
+            }
+        }
+        printf("\n");
+    }
+}
+
+
+
+int value_occurence(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            occurence++;
+            // Compte le nombre d'occurence de la valeur dans la colonne
+        }
+    }
+    return occurence;
+}
+
+int value_position(COLUMN *column, int value)
+{
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            return i+1;
+            // Retourne la position de la valeur dans la colonne
+        }
+    }
+    printf("La valeur n'existe pas dans la colonne\n");
+}
+
+int value_down_to(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] < value)
+        {
+            occurence++;
+            // Compte le nombre de valeurs inférieures à la valeur donnée
+        }
+    }
+    return occurence;
+
+}
+
+int value_up_to(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] > value)
+        {
+            occurence++;
+            // Compte le nombre de valeurs supérieures à la valeur donnée
+        }
+    }
+
+    return occurence;
+}
+
+int value_equal_to(COLUMN *column, int value)
+{
+    int occurence = 0;
+    for(int i = 0; i < column->tlog; i++)
+    {
+        if(column->values[i] == value)
+        {
+            occurence++;
+            // Compte le nombre de valeurs égales à la valeur donnée
+        }
+    }
+    return occurence;
 }

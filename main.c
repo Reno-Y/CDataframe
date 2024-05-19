@@ -5,56 +5,61 @@
 int
 main() {
 
-
-
-    COLUMN **dataframe = create_empty_cd_dataframe(2);
-    fill_cd_dataframe(dataframe, 2);
-    print_cd_dataframe(dataframe, 2);
-
-
-
 /*
-    printf("Combiens de fois se trouve la valeur 10 dans la colonne mycolumn ?\n");
-    printf("La valeur 10 se trouve %d fois dans la colonne mycolumn\n", value_occurence(mycolumn, 10));
+   printf("Bienvenu dans le programme de test de la structure de donnée Dataframe\n");
+   printf("Voici la liste des fonctionalités que vous pouvez tester\n");
+    printf("1. Créer un Dataframe\n");
+    printf("2. Remplir un Dataframe\n");
+    printf("3. Afficher un Dataframe\n");
+    printf("4. Ajouter une colonne à un Dataframe\n");
+    printf("5. Ajouter une ligne à un Dataframe\n");
+    printf("6. Supprimer une colonne d'un Dataframe\n");
+    printf("7. Supprimer une ligne d'un Dataframe\n");
+    printf("8. Remplacer une valeur d'un Dataframe\n");
+    printf("9. Renommer une colonne d'un Dataframe\n");
+    printf("10. Afficher le nombre de lignes d'un Dataframe\n");
+    printf("11. Afficher le nombre de colonnes d'un Dataframe\n");
+    printf("12. Afficher le nombre de cellules identiques à une valeur donnée dans un Dataframe\n");
+    printf("13. Afficher le nombre de cellules supérieures à une valeur donnée dans un Dataframe\n");
+    printf("14. Afficher le nombre de cellules inférieures à une valeur donnée dans un Dataframe\n");
+    printf("15. Quitter le programme\n");
 
-    printf("A quelle position se trouve la valeur 20 dans la colonne mycolumn ?\n");
-    printf("La valeur 20 se trouve à la position %d dans la colonne mycolumn\n", value_position(mycolumn, 20));
+int choice;
+    printf("Veuillez saisir le numéro de l'option que vous voulez tester\n");
+    scanf("%d", &choice);
 
-    printf("Combien de valeurs sont inférieures à 20 dans la colonne mycolumn ?\n");
-    printf("Il y a %d valeurs inférieures à 20 dans la colonne mycolumn\n", value_up_to(mycolumn, 20));
+    switch (choice)
+    {
 
-    printf("Combien de valeurs sont supérieures à 20 dans la colonne mycolumn ?\n");
-    printf("Il y a %d valeurs supérieures à 20 dans la colonne mycolumn\n", value_down_to(mycolumn, 20));
-
-    printf("Combien de valeurs sont égales à 20 dans la colonne mycolumn ?\n");
-    printf("Il y a %d valeurs égales à 20 dans la colonne mycolumn\n", value_equal_to(mycolumn, 20));
-
-    printf("Ajoutons la valeur 35 à la ligne 2\n");
-    add_line(mycolumn, 2, 35);
+    }
 
 
-    printf("Ajoutons une colonne à la colonne mycolumn\n");
-    add_column(mycolumn, "mycolumn2");
+    COLUMN *mycol = create_column("Column 1");
+    COLUMN *mycol2 = create_column("test2");
 
-    printf("Renommons la colonne mycolumn2 en mycolumn3\n");
-    rename_column(mycolumn, "mycolumn3");
+    insert_value(mycol, 1);
+    insert_value(mycol, 3);
+    insert_value(mycol, 3);
 
-    printf("La valeur 10 existe-t-elle dans la colonne mycolumn ?\n");
-    printf("La valeur 10 %s dans la colonne mycolumn\n", value_exist(mycolumn, 10) ? "existe" : "n'existe pas");
 
-    printf("Remplaçons la valeur 10 par 5 à la ligne 0\n");
-    replace_value(mycolumn, 0, 10, 5);
 
-    printf("Le nom de la colonne est : ");
-    print_column_name(mycolumn);
+    insert_value(mycol2, 5);
+    insert_value(mycol2, 4);
+    insert_value(mycol2, 3);
+    insert_value(mycol2, 2);
+    insert_value(mycol2, 1);
 
-    printf("Le nombre de lignes est : %d\n", number_of_lines(mycolumn));
+    COLUMN columns[] = {*mycol, *mycol2};
+    print_column(columns,2);
+*/
 
-    printf("Le nombre de colonnes est : %d\n", number_of_columns(mycolumn));
+    CDataframe *dataframe = create_empty_dataframe();
+    add_column_to_dataframe(dataframe, create_column("Column 1"));
+    fill_dataframe(dataframe);
+    print_dataframe(dataframe);
 
-    COLUMN** mydataframe = CDdataframe(4);
 
     return 0;
-*/
+
 
 }

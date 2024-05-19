@@ -3,7 +3,8 @@ project(projetC C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(projetC main.c
+add_executable(projetC
+        main.c
         Dataframe.h
         Dataframe.c
         column.h
