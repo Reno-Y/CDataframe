@@ -1,22 +1,15 @@
 #include "Dataframe.h"
 #include <stdio.h>
 #include <stdlib.h>
+#define BUFFER_SIZE 256
 
-COLUMN** create_dataframe(int nb_columns)
+CDataframe* create_empty_dataframe()
 {
-    COLUMN **CD_dataframe = (COLUMN **)malloc(nb_columns * sizeof(COLUMN *));
-    return CD_dataframe;
-}
-/*
-void fill_cd_dataframe(COLUMN **CD_dataframe, int nb_col)
-{
-    for (int i = 0; i < nb_col; i++)
-    {
-        CD_dataframe[i] = create_column("colonne");
-        for (int j = 0; j < 10; j++)
-        {
-            insert_value(CD_dataframe[i], j);
-        }
+    CDataframe *dataframe = (CDataframe *)malloc(sizeof(CDataframe));
+    if (dataframe == NULL) {
+        return NULL;
     }
+    dataframe->column = NULL;
+    dataframe->nbcol = 0;
+    return dataframe;
 }
- */

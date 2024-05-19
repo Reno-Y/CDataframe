@@ -31,7 +31,7 @@ int choice;
     {
 
     }
-*/
+
 
     COLUMN *mycol = create_column("Column 1");
     COLUMN *mycol2 = create_column("test2");
@@ -50,12 +50,12 @@ int choice;
 
     COLUMN columns[] = {*mycol, *mycol2};
     print_column(columns,2);
+*/
 
-
-
-
-
-
+    CDataframe *dataframe = create_empty_dataframe();
+    add_column_to_dataframe(dataframe, create_column("Column 1"));
+    fill_dataframe(dataframe);
+    print_dataframe(dataframe);
 
 
     return 0;
