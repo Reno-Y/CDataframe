@@ -31,31 +31,12 @@ int choice;
     switch (choice)
     {
 
-    }
-
-
-    COLUMN *mycol = create_column("Column 1");
-    COLUMN *mycol2 = create_column("test2");
-
-    insert_value(mycol, 1);
-    insert_value(mycol, 3);
-    insert_value(mycol, 3);
-
-
-
-    insert_value(mycol2, 5);
-    insert_value(mycol2, 4);
-    insert_value(mycol2, 3);
-    insert_value(mycol2, 2);
-    insert_value(mycol2, 1);
-
-    COLUMN columns[] = {*mycol, *mycol2};
-    print_column(columns,2);
 */
 
     CDATAFRAME *dataframe = create_empty_dataframe();
-    fill_dataframe(dataframe);
-    print_dataframe(dataframe);
+    fill_dataframe_hardcode(dataframe);
+
+    print_column_dataframe(dataframe, 1);
 
 
     return 0;

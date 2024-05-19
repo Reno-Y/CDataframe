@@ -13,7 +13,6 @@ void delete_column(COLUMN *column);
 
 void print_column(COLUMN *columns);
 
-void print_column2(COLUMN *column);
 
 int value_occurence(COLUMN *column, int value);
 

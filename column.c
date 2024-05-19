@@ -76,81 +76,8 @@ void print_column(COLUMN *column)
     printf("\n");
 }
 
-void print_column2(COLUMN *column)
-{
-    printf("%s\n", column->title);
-    for(int i = 0; i < column->tlog; i++)
-    {
-        printf( "%d \n", column->values[i]);
-    }
-}
 
 
-/*
-void print_column(COLUMN *columns, int nb_col)
-{
-
-
-    int nb_real_column = sizeof columns / sizeof columns[0];
-
-    if (nb_col > nb_real_column) {
-        printf("Le nombre de colonnes a afficher est superieur au nombre de colonnes reelles\n");
-        return;
-    }
-     //tentative de verification du nombre de colonnes a afficher
-
-
-    int all_empty = 1;
-    for (int i = 0; i < nb_col; i++) {
-        if (columns[i].tlog != 0) {
-            all_empty = 0;
-            break;
-        }
-    }
-    // Vérifier si toutes les colonnes sont vides
-
-
-
-
-    if (all_empty) {
-        // Affiche un message si toutes les colonnes sont vides
-
-        printf("Toutes les colonnes sont vides\n");
-        return;
-    }
-
-    // Afficher les titres des colonnes
-    for (int i = 0; i < nb_col; i++)
-    {
-        if (columns[i].tlog != 0)
-        {
-            printf("%-15s", columns[i].title);
-        }
-    }
-    printf("\n");
-
-    // Déterminer la longueur maximale de toutes les colonnes
-    int max_tlog = 0;
-    for (int i = 0; i < nb_col; i++) {
-        if (columns[i].tlog > max_tlog) {
-            max_tlog = columns[i].tlog;
-        }
-    }
-
-    // Afficher les valeurs des colonnes
-    for (int i = 0; i < max_tlog; i++) {
-        for (int j = 0; j < nb_col; j++) {
-            if (i < columns[j].tlog) {
-                printf("[%d] %-11d", i + 1, columns[j].values[i]);
-            } else {
-                printf("               ");
-                // Espace pour les colonnes avec moins de lignes
-            }
-        }
-        printf("\n");
-    }
-}
-*/
 
 
 
