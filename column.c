@@ -78,9 +78,6 @@ void print_column(COLUMN *column)
 
 
 
-
-
-
 int value_occurence(COLUMN *column, int value)
 {
     int occurence = 0;

@@ -33,6 +33,7 @@ void fill_dataframe_hardcode(CDATAFRAME *dataframe)
     insert_value(column3, 2);
     insert_value(column3, 3);
 
+
     dataframe->column = (COLUMN **)realloc(dataframe->column, (dataframe->nbcol + 3) * sizeof(COLUMN *));
     dataframe->column[dataframe->nbcol] = column1;
     dataframe->nbcol++;
@@ -158,9 +159,11 @@ void print_line_dataframe(CDATAFRAME *cdataframe, int line)
         }
         else
         {
-            printf("[%d] \n", i + 1);
+            printf("              ");
         }
+
     }
+    printf("\n");
 }
 
 void print_column_dataframe(CDATAFRAME *cdataframe, int column)
@@ -218,12 +221,12 @@ void add_column_to_dataframe(CDATAFRAME *dataframe)
 
 // 3.Opérations usuelles
 
-void add_line_to_dataframe(CDATAFRAME *dataframe) {
-    int collumn = 0;
+
+
+void add_line_to_dataframe(CDATAFRAME *dataframe)
+{
+
     for (int i = 0; i < dataframe->nbcol; i++) {
-        collumn++;
-    }
-    for (int i = 0; i < collumn; i++) {
         int value;
         printf("Veuillez saisir la valeur de la colonne %d : \n", i + 1);
         if (scanf("%d", &value) != 1) {
@@ -233,6 +236,28 @@ void add_line_to_dataframe(CDATAFRAME *dataframe) {
         if (insert_value(dataframe->column[i], value) != 0) {
             printf("Erreur lors de l'insertion de la valeur.\n");
             continue;
+        }
+    }
+}
+
+void remove_line_from_dataframe(CDATAFRAME *dataframe)
+{
+    int line;
+    printf("Veuillez saisir le numero de la ligne que vous voulez supprimer : \n");
+    if (scanf("%d", &line) != 1 || line < 1)
+    {
+        printf("Numéro de ligne invalide.\n");
+        return;
+    }
+    for (int i = 0; i < dataframe->nbcol; i++)
+    {
+        if (line <= dataframe->column[i]->tlog)
+        {
+            for (int j = line; j < dataframe->column[i]->tlog; j++)
+            {
+                dataframe->column[i]->values[j - 1] = dataframe->column[i]->values[j];
+            }
+            dataframe->column[i]->tlog--;
         }
     }
 }
