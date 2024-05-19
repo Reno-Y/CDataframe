@@ -69,7 +69,16 @@ void delete_column(COLUMN *column)
 
 void print_column(COLUMN *columns, int nb_col)
 {
-    // Vérifier si toutes les colonnes sont vides
+
+    /*
+    int nb_real_column = sizeof columns / sizeof columns[0];
+
+    if (nb_col > nb_real_column) {
+        printf("Le nombre de colonnes a afficher est superieur au nombre de colonnes reelles\n");
+        return;
+    }
+     //tentative de verification du nombre de colonnes a afficher
+    */
 
     int all_empty = 1;
     for (int i = 0; i < nb_col; i++) {
@@ -78,6 +87,10 @@ void print_column(COLUMN *columns, int nb_col)
             break;
         }
     }
+    // Vérifier si toutes les colonnes sont vides
+
+
+
 
     if (all_empty) {
         // Affiche un message si toutes les colonnes sont vides
