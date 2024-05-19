@@ -3,14 +3,14 @@
 typedef struct {
     COLUMN **column;  // pointeurs vers des colonnes
     int nbcol;         // Nombre de colonnes
-} CDataframe;
+} CDATAFRAME;
 
 
-CDataframe *create_empty_dataframe();
+CDATAFRAME *create_empty_dataframe();
 
-void add_column_to_dataframe(CDataframe *dataframe, COLUMN *column);
+void fill_dataframe(CDATAFRAME *dataframe);
 
-void fill_cdataframe(CDataframe *dataframe);
+void print_dataframe(CDATAFRAME *dataframe);
 
 
-void print_cdataframe(CDataframe *dataframe);
+void fill_dataframe_hardcode(CDATAFRAME *dataframe);

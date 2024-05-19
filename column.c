@@ -65,12 +65,32 @@ void delete_column(COLUMN *column)
     free(column);
 }
 
+void print_column(COLUMN *column)
+{
+
+    printf("%s\n", column->title);
+    for(int i = 0; i < column->tlog; i++)
+    {
+        printf( "[%d] %d \n", i+1, column->values[i]);
+    }
+    printf("\n");
+}
+
+void print_column2(COLUMN *column)
+{
+    printf("%s\n", column->title);
+    for(int i = 0; i < column->tlog; i++)
+    {
+        printf( "%d \n", column->values[i]);
+    }
+}
 
 
+/*
 void print_column(COLUMN *columns, int nb_col)
 {
 
-    /*
+
     int nb_real_column = sizeof columns / sizeof columns[0];
 
     if (nb_col > nb_real_column) {
@@ -78,7 +98,7 @@ void print_column(COLUMN *columns, int nb_col)
         return;
     }
      //tentative de verification du nombre de colonnes a afficher
-    */
+
 
     int all_empty = 1;
     for (int i = 0; i < nb_col; i++) {
@@ -130,6 +150,7 @@ void print_column(COLUMN *columns, int nb_col)
         printf("\n");
     }
 }
+*/
 
 
 
@@ -189,6 +210,8 @@ int value_up_to(COLUMN *column, int value)
 
     return occurence;
 }
+
+
 
 int value_equal_to(COLUMN *column, int value)
 {

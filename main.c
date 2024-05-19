@@ -53,8 +53,7 @@ int choice;
     print_column(columns,2);
 */
 
-    CDataframe *dataframe = create_empty_dataframe();
-    add_column_to_dataframe(dataframe, create_column("Column 1"));
+    CDATAFRAME *dataframe = create_empty_dataframe();
     fill_dataframe(dataframe);
     print_dataframe(dataframe);
 

@@ -11,7 +11,9 @@ int insert_value(COLUMN *column, int value);
 
 void delete_column(COLUMN *column);
 
-void print_column(COLUMN *columns, int nb_col);
+void print_column(COLUMN *columns);
+
+void print_column2(COLUMN *column);
 
 int value_occurence(COLUMN *column, int value);
 
