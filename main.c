@@ -1,5 +1,13 @@
 #include <stdio.h>
 #include "Dataframe.h"
+
+/*
+ * Cdataframe
+ * Renaud YOGANATHAN & Arshdeep SINGH
+ *
+ * Le main.c permet l'exécution du programme de test de la structure de donnée Dataframe
+ */
+
 void welcome_message()
 {
     printf("**********************************************************************\n");
@@ -20,12 +28,12 @@ void wait_for_user() {
 
 int main()
 {
-    CDATAFRAME *dataframe = create_empty_dataframe();
-    welcome_message();
+    CDATAFRAME *dataframe = create_empty_dataframe(); // Crée un dataframe vide
+    welcome_message(); // Affiche le message de bienvenue
 
     int choice = 0;
     do {
-
+        // Affiche le menu principale
         printf("\n");
         printf("------------------------------------\n");
         printf("               Menu                 \n");
@@ -48,6 +56,7 @@ int main()
 
         switch  (choice)
         {
+            // Switch case pour les choix du menu
             case 1:
                 printf("----------------\n");
                 printf("- Alimentation -\n");
@@ -69,7 +78,7 @@ int main()
 
                 switch(choix_alimentation)
 
-
+                // Switch case pour les choix du menu
                 {
                     case 1:
                         fill_dataframe(dataframe);
@@ -103,6 +112,7 @@ int main()
                 printf("3. Afficher une colonne du dataframe\n");
                 printf("4. Retour\n");
                 printf("\n");
+
 
                 int choix_affichage = 0;
                 while (choix_affichage < 1 || choix_affichage > 4)

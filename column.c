@@ -4,6 +4,13 @@
 #include <string.h>
 #define REALOC_SIZE 256
 
+/*
+ * Cdataframe
+ * Renaud YOGANATHAN & Arshdeep SINGH
+ *
+ * Le fichier column.c contient les bases de données pour les colonnes.
+ */
+
 
 COLUMN *create_column(char* title) {
     COLUMN *column = malloc(sizeof(COLUMN));
@@ -72,6 +79,7 @@ void print_column(COLUMN *column)
     for(int i = 0; i < column->tlog; i++)
     {
         printf( "[%d] %d \n", i+1, column->values[i]);
+        // Affiche le titre de la colonne et les valeurs
     }
     printf("\n");
 }
