@@ -38,12 +38,8 @@ int main()
         printf("\n");
 
 
-        while (choice < 1 || choice > 5)
-        {
-            printf("Entrez votre choix : ");
-            scanf("%d", &choice);
-            printf("\n");
-        }
+
+
 
 
         switch  (choice)

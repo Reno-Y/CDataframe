@@ -103,6 +103,7 @@ int value_position(COLUMN *column, int value)
         }
     }
     printf("La valeur n'existe pas dans la colonne\n");
+    return 0;
 }
 
 int value_down_to(COLUMN *column, int value)
