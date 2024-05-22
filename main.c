@@ -45,7 +45,12 @@ int main()
         printf("5. Quitter\n");
         printf("\n");
 
-
+        while (choice < 1 || choice > 5)
+        {
+            printf("Entrez votre choix : ");
+            scanf("%d", &choice);
+            printf("\n");
+        }
 
 
 
